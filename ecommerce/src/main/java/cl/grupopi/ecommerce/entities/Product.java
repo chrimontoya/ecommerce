@@ -1,6 +1,7 @@
 package cl.grupopi.ecommerce.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "product", schema = "public")
@@ -9,8 +10,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    @Size(min = 3,max = 45)
     private String name;
+    @NotBlank
+    @Size(max = 200)
     private String description;
+    @Min(100)
+    @NotNull
     private Integer price;
 
     public Long getId() {

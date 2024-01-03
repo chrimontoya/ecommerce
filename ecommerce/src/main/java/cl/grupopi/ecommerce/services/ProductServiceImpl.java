@@ -47,9 +47,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> delete(Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
-        productOptional.ifPresent(productExist -> {
-            productRepository.delete(productExist);
-        });
+        productOptional.ifPresent(productExist -> productRepository.delete(productExist));
         return productOptional;
     }
 }
