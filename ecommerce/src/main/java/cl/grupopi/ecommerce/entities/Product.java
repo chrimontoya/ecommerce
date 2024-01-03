@@ -1,5 +1,6 @@
 package cl.grupopi.ecommerce.entities;
 
+import cl.grupopi.ecommerce.validations.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -10,7 +11,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+    @IsRequired
     @Size(min = 3,max = 45)
     private String name;
     @NotBlank
