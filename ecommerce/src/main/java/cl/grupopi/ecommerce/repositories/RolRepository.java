@@ -1,11 +1,11 @@
 package cl.grupopi.ecommerce.repositories;
 
-import cl.grupopi.ecommerce.entities.Rol;
+import cl.grupopi.ecommerce.entities.Role;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface RolRepository extends CrudRepository<Rol, Long> {
+public interface RolRepository extends CrudRepository<Role, Long> {
 
-    Optional<Rol> findByName(String name);
+    Optional<Role> findByName(String name);
 }

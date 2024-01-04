@@ -3,8 +3,8 @@ package cl.grupopi.ecommerce.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "rol")
-public class Rol {
+@Table(name = "role", schema = "public")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,29 +1,31 @@
 package cl.grupopi.ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "public")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private boolean enabled;
     @Transient
     private boolean admin;
     @ManyToMany
     @JoinTable(
-            name = "user_rol",
+            name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id"),
-            uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "rol_id"}) }
+            inverseJoinColumns = @JoinColumn(name = "role_id"),
+            uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "role_id"}) }
     )
-    private List<Rol> rolList;
+    private List<Role> roles;
     public Long getId() {
         return id;
     }
@@ -54,10 +56,10 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-    public List<Rol> getRolList() {
-        return rolList;
+    public List<Role> getRoles() {
+        return roles;
     }
-    public void setRolList(List<Rol> rolList) {
-        this.rolList = rolList;
+    public void setRoles(List<Role> roleList) {
+        this.roles = roleList;
     }
 }

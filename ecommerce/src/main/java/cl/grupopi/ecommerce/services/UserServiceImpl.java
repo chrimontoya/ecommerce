@@ -1,6 +1,6 @@
 package cl.grupopi.ecommerce.services;
 
-import cl.grupopi.ecommerce.entities.Rol;
+import cl.grupopi.ecommerce.entities.Role;
 import cl.grupopi.ecommerce.entities.User;
 import cl.grupopi.ecommerce.repositories.RolRepository;
 import cl.grupopi.ecommerce.repositories.UserRepository;
@@ -30,16 +30,16 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public User save(User user) {
-        Optional<Rol> optionalRolUser = rolRepository.findByName("ROL_USER");
-        List<Rol> rolList = new ArrayList<>();
+        Optional<Role> optionalRolUser = rolRepository.findByName("ROLE_USER");
+        List<Role> roleList = new ArrayList<>();
 
-        optionalRolUser.ifPresent(rolList::add);
+        optionalRolUser.ifPresent(roleList::add);
 
         if(user.isAdmin()){
-            Optional<Rol> optionalRolAdmin = rolRepository.findByName("ROL_ADMIN");
-            optionalRolAdmin.ifPresent(rolList::add);
+            Optional<Role> optionalRolAdmin = rolRepository.findByName("ROLE_ADMIN");
+            optionalRolAdmin.ifPresent(roleList::add);
         }
-        user.setRolList(rolList);
+        user.setRoles(roleList);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
