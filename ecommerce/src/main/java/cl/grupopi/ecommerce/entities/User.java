@@ -1,5 +1,6 @@
 package cl.grupopi.ecommerce.entities;
 
+import cl.grupopi.ecommerce.validations.UsernameAlreadyExists;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -12,6 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @UsernameAlreadyExists
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
