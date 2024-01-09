@@ -1,5 +1,6 @@
 package cl.grupopi.ecommerce.security.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,19 +10,18 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import javax.crypto.SecretKey;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import static cl.grupopi.ecommerce.security.TokenJwtSecurityConfig.*;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
-    private static final SecretKey SECRET_KEY = Jwts.SIG.HS256.key().build();
-    private static final String PREFIX_TOKEN = "Bearer ";
-    private static final String HEADER_AUTHORIZATION = "Authorization";
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -49,8 +49,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User username = (User) authResult.getPrincipal();
+        Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
+
+        Claims claims = Jwts.claims().build();
+        claims.put("authorities", roles);
+
         String token = Jwts.builder()
                 .subject(username.getUsername())
+                .claims(claims)
+                .expiration(new Date(System.currentTimeMillis() + 3600000))
+                .issuedAt(new Date())
                 .signWith(SECRET_KEY)
                 .compact();
 
