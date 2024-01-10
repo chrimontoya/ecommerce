@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String password = null;
 
         try {
-            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            cl.grupopi.ecommerce.entities.User user = new ObjectMapper().readValue(request.getInputStream(), cl.grupopi.ecommerce.entities.User.class);
             username = user.getUsername();
             password = user.getPassword();
         } catch (IOException e) {
@@ -48,13 +48,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        User username = (User) authResult.getPrincipal();
+        User userAuthenticated = (User) authResult.getPrincipal();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
 
         Claims claims = Jwts.claims().add("authorities", roles).build();
 
         String token = Jwts.builder()
-                .subject(username.getUsername())
+                .subject(userAuthenticated.getUsername())
                 .claims(claims)
                 .expiration(new Date(System.currentTimeMillis() + 3600000))
                 .issuedAt(new Date())
@@ -65,8 +65,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         Map<String, String> body = new HashMap<>();
         body.put("token",token);
-        body.put("username", String.valueOf(username));
-        body.put("message", String.format("Se ha iniciado sesión con el usuario %s", username));
+        body.put("username", String.valueOf(userAuthenticated.getUsername()));
+        body.put("message", String.format("Se ha iniciado sesión con el usuario %s", userAuthenticated.getUsername()));
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
         response.setContentType(CONTENT_TYPE);
