@@ -1,6 +1,7 @@
 package cl.grupopi.ecommerce.security;
 
 import cl.grupopi.ecommerce.security.filter.JwtAuthenticationFilter;
+import cl.grupopi.ecommerce.security.filter.JwtValidationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,7 @@ public class SpringSecurityConfig {
                         .requestMatchers("/api/v1/users").permitAll()
                         .anyRequest().authenticated())
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(new JwtValidationFilter(authenticationManager()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
