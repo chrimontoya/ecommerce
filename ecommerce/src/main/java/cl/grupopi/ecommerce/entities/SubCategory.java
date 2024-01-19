@@ -14,8 +14,8 @@ public class SubCategory {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-//    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Product> products;
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
 
     public Long getId() {
         return id;

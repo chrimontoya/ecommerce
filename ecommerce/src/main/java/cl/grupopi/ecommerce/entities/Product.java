@@ -58,4 +58,12 @@ public class Product {
     public void setPrice(Integer price) {
         this.price = price;
     }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
 }
