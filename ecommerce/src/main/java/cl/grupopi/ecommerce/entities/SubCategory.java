@@ -2,6 +2,8 @@ package cl.grupopi.ecommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "sub_category", schema = "public")
 public class SubCategory {
@@ -9,6 +11,9 @@ public class SubCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Long getId() {
         return id;

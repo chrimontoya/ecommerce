@@ -2,6 +2,8 @@ package cl.grupopi.ecommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "category", schema = "public")
 public class Category {
@@ -9,6 +11,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SubCategory> subCategory;
 
     public Long getId() {
         return id;
@@ -24,5 +28,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<SubCategory> getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(List<SubCategory> subCategory) {
+        this.subCategory = subCategory;
     }
 }
