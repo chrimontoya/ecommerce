@@ -3,6 +3,7 @@ package cl.grupopi.ecommerce.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "client", schema = "public")
@@ -19,6 +20,11 @@ public class Client {
     @Column(name = "birth_day")
     private Date birthDay;
     private Integer phone;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "client_addresses", joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"address_id"}))
+    private List<Address> addresses;
 
     public Long getId() {
         return id;
@@ -74,5 +80,13 @@ public class Client {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

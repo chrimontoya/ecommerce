@@ -11,6 +11,9 @@ public class Address {
     private Long id;
     private String name;
     private Integer number;
+//    @ManyToOne
+//    @JoinColumn(name = "client_id")
+//    private Client client;
 
     public Long getId() {
         return id;
@@ -35,4 +38,12 @@ public class Address {
     public void setNumber(Integer number) {
         this.number = number;
     }
+//
+//    public Client getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(Client client) {
+//        this.client = client;
+//    }
 }
