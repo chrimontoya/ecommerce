@@ -26,7 +26,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
     private SubCategory subCategory;
-
+    @ManyToOne
+    @JoinColumn(name = "marker_id")
+    private Marker marker;
     public Long getId() {
         return id;
     }
@@ -65,5 +67,13 @@ public class Product {
 
     public void setSubCategory(SubCategory subCategory) {
         this.subCategory = subCategory;
+    }
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
     }
 }
