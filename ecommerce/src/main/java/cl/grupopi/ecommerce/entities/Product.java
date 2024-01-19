@@ -3,6 +3,9 @@ package cl.grupopi.ecommerce.entities;
 import cl.grupopi.ecommerce.validations.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "product", schema = "public")
@@ -12,7 +15,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @IsRequired
-    @Size(min = 3,max = 45)
+    @jakarta.validation.constraints.Size(min = 3,max = 45)
     private String name;
     @NotBlank
     @Size(max = 200)
@@ -20,6 +23,9 @@ public class Product {
     @Min(100)
     @NotNull
     private Integer price;
+    @ManyToOne
+    @JoinColumn(name = "sub_category_id")
+    private SubCategory subCategory;
 
     public Long getId() {
         return id;
