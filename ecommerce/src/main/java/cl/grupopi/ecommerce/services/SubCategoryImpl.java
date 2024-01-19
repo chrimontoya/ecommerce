@@ -20,7 +20,7 @@ public class SubCategoryImpl implements SubCategoryService {
             if(subCategoryOptional.isPresent()){
                 SubCategory newSubCategory = subCategoryOptional.orElseThrow();
                 newSubCategory.setName(subCategory.getName());
-//                newSubCategory.setProducts(subCategory.getProducts());
+                newSubCategory.setProducts(subCategory.getProducts());
                 return subCategoryRepository.save(newSubCategory);
             }
         }
