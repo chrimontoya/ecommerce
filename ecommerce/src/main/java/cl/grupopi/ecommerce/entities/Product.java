@@ -29,6 +29,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "marker_id")
     private Marker marker;
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private cl.grupopi.ecommerce.entities.Size size;
     public Long getId() {
         return id;
     }
@@ -75,5 +78,13 @@ public class Product {
 
     public void setMarker(Marker marker) {
         this.marker = marker;
+    }
+
+    public cl.grupopi.ecommerce.entities.Size getSize() {
+        return size;
+    }
+
+    public void setSize(cl.grupopi.ecommerce.entities.Size size) {
+        this.size = size;
     }
 }
