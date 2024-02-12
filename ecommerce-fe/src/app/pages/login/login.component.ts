@@ -5,11 +5,12 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 import {MatButton} from "@angular/material/button";
 import {LoginService} from "../../services/login.service";
 import {LocalService} from "../../services/local.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButton],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButton, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

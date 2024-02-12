@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {LoginDTO} from '../models/dto/loginDTO';
+import { Injectable } from '@angular/core';
+import { LoginDTO } from '../models/dto/loginDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +7,16 @@ import {LoginDTO} from '../models/dto/loginDTO';
 export class LocalService {
 
   setUser(user: LoginDTO) {
-    sessionStorage.setItem("user", JSON.stringify(user));
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem("user", JSON.stringify(user));
+    }
   }
 
   getUser(): LoginDTO | null {
-    return JSON.parse(sessionStorage.getItem("user")!);
+    if (typeof sessionStorage !== 'undefined') {
+      const userString = sessionStorage.getItem("user");
+      return userString ? JSON.parse(userString) : null;
+    }
+    return null;
   }
-
 }
