@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButton} from "@angular/material/button";
 import {LoginService} from "../../services/login.service";
+import {LocalService} from "../../services/local.service";
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -19,14 +21,15 @@ export class LoginComponent {
 
   constructor(
     private loginService: LoginService,
+    private localService: LocalService,
   ) {
   }
 
-  login(){
+  login() {
     this.loginService.logIn(this.formLogin.value)
       .subscribe({
-        next: (res)=> {
-          console.log(res);
+        next: (res) => {
+          this.localService.setUser(res.data);
         }
       });
   }
