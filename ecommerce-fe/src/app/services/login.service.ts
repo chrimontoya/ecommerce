@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Global} from "../constants/global";
@@ -12,8 +12,8 @@ export class LoginService {
     private httpClient: HttpClient
   ) { }
 
-  logIn(data: any):Observable<any>{
+  logIn(data: any):Observable<any> {
     return this.httpClient.post<any>(Global.API_URL + '/login', data);
   }
-  
+
 }

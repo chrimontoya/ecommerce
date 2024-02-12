@@ -21,4 +21,6 @@ public class CategoryController {
     public ResponseEntity<?> create(@RequestBody Category category){
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(category));
     }
+
+
 }

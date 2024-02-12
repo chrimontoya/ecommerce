@@ -1,4 +1,5 @@
 package cl.grupopi.ecommerce.security.filter;
+import cl.grupopi.ecommerce.entities.dto.ResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -66,9 +67,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map<String, String> body = new HashMap<>();
         body.put("token",token);
         body.put("username", String.valueOf(userAuthenticated.getUsername()));
-        body.put("message", String.format("Se ha iniciado sesión con el usuario %s", userAuthenticated.getUsername()));
-
-        response.getWriter().write(new ObjectMapper().writeValueAsString(body));
+        ResponseDTO<Map<String, String>> responseDTO = new ResponseDTO();
+        responseDTO.setStatus(200);
+        responseDTO.setMessage(String.format("Se ha iniciado sesión con el usuario %s", userAuthenticated.getUsername()));
+        responseDTO.setData(body);
+        response.getWriter().write(new ObjectMapper().writeValueAsString(responseDTO));
         response.setContentType(CONTENT_TYPE);
         response.setStatus(200);
     }
