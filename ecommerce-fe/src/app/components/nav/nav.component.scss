@@ -1,0 +1,17 @@
+.nav-toolbar {
+  display: flex;
+  flex-direction: row;
+  background-color: aqua;
+  align-items: center;
+
+  form {
+    width: 500px;
+    mat-form-field {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+.spacer {
+  flex: 1 1 auto;
+}

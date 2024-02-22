@@ -19,4 +19,10 @@ export class LocalService {
     }
     return null;
   }
+
+  logOut(): void{
+    sessionStorage.clear();
+    location.reload();
+  }
+
 }
