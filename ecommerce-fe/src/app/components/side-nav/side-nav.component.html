@@ -1,0 +1,26 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="over" [opened]="panelOpenState"
+              (openedChange)="this.sideNavService.openedChanged($event)"
+              [autoFocus]="true">
+
+  <mat-accordion>
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Categorias
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let opt of list">
+        <button mat-button>
+          {{opt}}
+        </button>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>s
+
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-nav></app-nav>
+  </mat-drawer-content>
+</mat-drawer-container>

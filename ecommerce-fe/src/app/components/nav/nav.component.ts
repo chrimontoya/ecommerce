@@ -8,6 +8,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {LocalService} from "../../services/local.service";
 import {LoginDTO} from "../../models/dto/loginDTO";
 import {NgForOf} from "@angular/common";
+import {SideNavService} from "../../services/side-nav.service";
 
 @Component({
   selector: 'app-nav',
@@ -35,6 +36,7 @@ export class NavComponent {
 
   constructor(
     private localService: LocalService,
+    public sideNavService: SideNavService,
   ) {
   }
 
