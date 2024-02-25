@@ -1,4 +1,7 @@
 package cl.grupopi.ecommerce.entities.dto;
+
+import java.util.Map;
+
 public class ResponseDTO<T> {
     private Integer status;
     private String message;
@@ -30,7 +33,7 @@ public class ResponseDTO<T> {
         return data;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setData(Map<String, Object> data) {
+        this.data = (T) data;
     }
 }

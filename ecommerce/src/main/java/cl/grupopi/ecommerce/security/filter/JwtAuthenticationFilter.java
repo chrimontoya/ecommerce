@@ -15,10 +15,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 import static cl.grupopi.ecommerce.security.TokenJwtSecurityConfig.*;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -64,9 +62,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.addHeader(HEADER_AUTHORIZATION,PREFIX_TOKEN + token);
 
-        Map<String, String> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<>();
+        List<String> rolesName = new ArrayList<>();
+        for (GrantedAuthority authority: userAuthenticated.getAuthorities()) {
+            rolesName.add(authority.getAuthority());
+        }
+        
         body.put("token",token);
         body.put("username", String.valueOf(userAuthenticated.getUsername()));
+        body.put("roles", rolesName);
         ResponseDTO<Map<String, String>> responseDTO = new ResponseDTO();
         responseDTO.setStatus(200);
         responseDTO.setMessage(String.format("Se ha iniciado sesión con el usuario %s", userAuthenticated.getUsername()));
