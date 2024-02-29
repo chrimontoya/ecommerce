@@ -3,22 +3,46 @@
               (openedChange)="this.sideNavService.openedChanged($event)"
               [autoFocus]="true">
 
-  <mat-accordion>
-    <mat-expansion-panel >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Categorias
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ng-container *ngFor="let opt of list">
-        <button mat-button>
-          {{opt}}
-        </button>
-      </ng-container>
-    </mat-expansion-panel>
-  </mat-accordion>s
+    <mat-accordion>
 
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Categorias
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list role="list" *ngFor="let opt of list">
+          <button mat-menu-item>{{opt}}</button>
+        </mat-list>
+      </mat-expansion-panel>
 
+      <mat-expansion-panel *ngIf="isAdmin">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Mantenedor
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list role="list" *ngFor="let opt of mantainerList">
+          <button mat-menu-item>{{opt}}</button>
+        </mat-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="isAdmin">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Administrador
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list role="list" *ngFor="let opt of adminList">
+          <button mat-menu-item>{{opt}}</button>
+        </mat-list>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <div class="buttons-list">
+      <button mat-button (click)="logOut()" *ngIf="isLogguedIn">Cerrar sesión</button>
+    </div>
   </mat-drawer>
   <mat-drawer-content>
     <app-nav></app-nav>

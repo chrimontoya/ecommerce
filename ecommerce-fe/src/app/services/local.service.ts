@@ -5,6 +5,11 @@ import { LoginDTO } from '../models/dto/loginDTO';
   providedIn: 'root'
 })
 export class LocalService {
+  user: LoginDTO | null = null;
+
+  constructor() {
+    this.getUser();
+  }
 
   setUser(user: LoginDTO) {
     if (typeof sessionStorage !== 'undefined') {
@@ -12,17 +17,26 @@ export class LocalService {
     }
   }
 
-  getUser(): LoginDTO | null {
+  getUser(): void {
     if (typeof sessionStorage !== 'undefined') {
-      const userString = sessionStorage.getItem("user");
-      return userString ? JSON.parse(userString) : null;
+      this.user = JSON.parse(sessionStorage.getItem("user")!);
     }
-    return null;
   }
 
   logOut(): void{
     sessionStorage.clear();
+    this.user = null;
     location.reload();
   }
 
+  hasRoleAdmin(){
+    if (this.user != null){
+      return this.user.roles.indexOf("ROLE_ADMIN") !== -1;
+    }
+    return false;
+  }
+
+  isLoggedIn(){
+    return this.user != null;
+  }
 }

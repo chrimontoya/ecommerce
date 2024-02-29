@@ -9,11 +9,12 @@ import {LocalService} from "../../services/local.service";
 import {LoginDTO} from "../../models/dto/loginDTO";
 import {NgForOf} from "@angular/common";
 import {SideNavService} from "../../services/side-nav.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatMenuModule, NgForOf],
+  imports: [MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatMenuModule, NgForOf, RouterLink],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })
@@ -32,12 +33,13 @@ export class NavComponent {
     {id: 3, description: "Envíos rápidos", order: 3},
   ]
 
-  user: LoginDTO | null = this.localService.getUser();
+  user: LoginDTO | null = null;
 
   constructor(
     private localService: LocalService,
     public sideNavService: SideNavService,
   ) {
+    this.user = this.localService.user;
   }
 
   menuAction(id: number) {

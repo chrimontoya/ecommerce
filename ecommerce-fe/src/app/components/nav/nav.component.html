@@ -22,7 +22,7 @@
   <button mat-icon-button class="example-icon" aria-label="Shopping cart">
     <mat-icon>shopping_cart</mat-icon>
   </button>
-  <button mat-button aria-label="Profile button" [matMenuTriggerFor]="user != null ? menu : null">
+  <button mat-button aria-label="Profile button" [matMenuTriggerFor]="user != null ? menu : null" [routerLink]="user != null ? '' : '../login'">
     {{ user != null ? 'Hola ' + user.username : 'Iniciar sesión'}}
   </button>
   <mat-menu #menu="matMenu">
