@@ -1,0 +1,13 @@
+name: ecommerce
+services:
+  ecommerce-backend:
+    container_name: ecommerce-be
+    image: ecommerce-be:latest
+    build: 
+      context: ./ecommerce-be/src
+      dockerfile: ./ecommerce-be/src/Dockerfile
+    ports:
+      - 8000:5000
+    volumes:
+      - "./ecommerce-be/src:/usr/src/app"
+    command: "python3 app.py"
