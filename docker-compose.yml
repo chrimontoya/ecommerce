@@ -11,3 +11,14 @@ services:
     volumes:
       - "./ecommerce-be/src:/usr/src/app"
     command: "python3 app.py"
+
+  ecommerce-database:
+    container_name: ecommerce-bd
+    image: postgres:bullseye
+    restart: always
+    shm_size: 128mb
+    environment:
+      # POSTGRES_USER: admin
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 8001:5432
