@@ -1,12 +1,9 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import declarative_base, relationship
-from models.role_model import Role
-from models.user_model import User
+from sqlalchemy import Column, Integer, ForeignKey
+from config.postgres_config import postgres_db
 
-UserRole_base = declarative_base()
-
-class UserRole(UserRole_base):
+class UserRole(postgres_db.Model):
     __tablename__ = 'user_role'
+    
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey(User.id))
-    role_id = Column(Integer, ForeignKey(Role.id))
+    user_id = Column(Integer, ForeignKey("user.id"))
+    role_id = Column(Integer, ForeignKey("role.id"))

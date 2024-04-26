@@ -5,4 +5,4 @@ auth_controller = AuthController()
 
 bp_auth = Blueprint('auth', __name__)
 
-bp_auth.route('', methods=['GET'])(auth_controller.test)
+bp_auth.route('/login', methods=['POST'])(auth_controller.login)
