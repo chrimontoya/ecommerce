@@ -5,7 +5,7 @@ services:
     image: ecommerce-be:latest
     build: 
       context: ./ecommerce-be/src
-      dockerfile: ./ecommerce-be/src/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 8000:5000
     volumes:

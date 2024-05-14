@@ -1,5 +1,7 @@
 from flask import Flask, current_app
 from routes.auth_route import bp_auth
+from routes.user_route import bp_user
+from routes.role_route import bp_role
 from config.postgres_config import postgres_db
 from flask_jwt_extended import JWTManager
 
@@ -23,6 +25,8 @@ with app.app_context():
 
 #routes
 app.register_blueprint(bp_auth, url_prefix="/api/v1/auth")
+app.register_blueprint(bp_user, url_prefix="/api/v1/users")
+app.register_blueprint(bp_role, url_prefix="/api/v1/roles")
 
 def main():
     app.run(host="0.0.0.0", port="5000", debug=True)
