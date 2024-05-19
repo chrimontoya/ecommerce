@@ -4,10 +4,12 @@ from routes.user_route import bp_user
 from routes.role_route import bp_role
 from config.postgres_config import postgres_db
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:postgres@ecommerce-bd/postgres"
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+CORS(app)
 jwt = JWTManager(app)
 
 postgres_db.init_app(app)

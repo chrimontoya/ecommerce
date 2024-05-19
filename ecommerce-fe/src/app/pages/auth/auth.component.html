@@ -1,11 +1,13 @@
-<mat-form-field>
-    <mat-label>Usuario</mat-label>
-    <input matInput>
-</mat-form-field>
-
-<mat-form-field>
-    <mat-label>Contraseña</mat-label>
-    <input matInput>
-</mat-form-field>
-
-<button mat-raised-button color="primary">Iniciar sesión</button>
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password">
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary" (click)="logIn()">Iniciar sesión</button>
+</form>
