@@ -13,3 +13,12 @@ class RoleDao:
             session.add(role)
             session.commit()
             return role.as_dict()
+        
+    def findRolesById(self, id):
+        with Session(postgres_db.engine) as session:
+            query = session.query(Role).filter(Role.id == id)
+            roles = []
+            if query:
+                for q in query:
+                    roles.append(q.as_dict())
+            return roles

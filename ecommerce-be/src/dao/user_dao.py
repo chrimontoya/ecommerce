@@ -26,4 +26,4 @@ class UserDao:
     def findUserByUsernameAndPassword(self, username, password):
         with Session(postgres_db.engine) as session:
             user = session.query(User).filter(User.username == username, User.password == password).first()
-            return user
+            return user.as_dict() if user else None
