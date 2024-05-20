@@ -27,11 +27,6 @@ export class AuthComponent {
 
   logIn() {
     this.authService
-      .logIn(this.form.get('username')?.value, this.form.get('password')?.value)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-      });
+      .logIn(this.form.get('username')?.value, this.form.get('password')?.value);
   }
 }

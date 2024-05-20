@@ -16,7 +16,7 @@ class AuthController:
         user = self.auth_dao.findUserByUsernameAndPassword(username, password)
 
         if user is None:
-            return jsonify(message="Bad username or password", status=400, data=[]), 400
+            return jsonify(message="Bad username or password", status=401, data=[]), 401
 
         access_token = create_access_token(identity=username)
         data = {
@@ -27,4 +27,4 @@ class AuthController:
                 "roles": self.roles_dao.findRolesById(user.get("id"))
             }
         }
-        return jsonify(message="", status=200, data=data)
+        return jsonify(message="User authenticated", status=200, data=data)

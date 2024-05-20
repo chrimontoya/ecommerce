@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { AuthComponent } from './pages/auth/auth.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-    { path: '**', redirectTo: 'iniciar-sesion', pathMatch: 'full'},
-    { path: 'iniciar-sesion', component: AuthComponent, title: 'iniciar sesión' }
+  { path: 'iniciar-sesion', component: AuthComponent },
+  { path: 'ecommerce', component: HomeComponent },
 ];
