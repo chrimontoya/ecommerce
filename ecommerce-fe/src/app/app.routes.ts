@@ -2,8 +2,10 @@ import { Routes } from '@angular/router';
 import { AuthComponent } from './pages/auth/auth.component';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './guards/auth.guard';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 export const routes: Routes = [
   { path: 'iniciar-sesion', component: AuthComponent },
-  { path: 'ecommerce', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'ecommerce', component: SideNavComponent, canActivate: [authGuard], children: [ { path: '', component: HomeComponent } ] },
 ];
