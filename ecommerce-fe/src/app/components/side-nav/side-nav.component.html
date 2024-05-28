@@ -1,8 +1,21 @@
 <mat-drawer-container autosize>
-    <mat-drawer mode="side" [opened]="show">
-      content
-    </mat-drawer>
+  <mat-drawer mode="side" [opened]="show">
+    <mat-list>
+      @for (item of items; track $index) {
+        <mat-list-item>
+          <button mat-raised-button [color]="item.color" (click)="item.navigate(item.path)">
+            <mat-icon>{{item.icon}}</mat-icon>
+            {{item.label}}
+          </button>
+        </mat-list-item>
+      }
+      <mat-list-item>
+        <button mat-raised-button color="warn" (click)="logOut()">
+          <mat-icon>account_circle</mat-icon>Cerrar sesión
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
 
-    <router-outlet></router-outlet>
-  
+  <router-outlet></router-outlet>
 </mat-drawer-container>
